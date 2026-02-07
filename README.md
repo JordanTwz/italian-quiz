@@ -14,7 +14,6 @@ This version is intended for **ABRSM Grades 1-5 only** (for now).
 
 ## Run locally
 ```powershell
-cd C:\Users\Jordan Tan\Desktop\italiantest
 python -m http.server 8000
 ```
 Then open `http://localhost:8000`.

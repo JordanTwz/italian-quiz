@@ -4,6 +4,9 @@ const CHOICE_COUNT = 4;
 const progressEl = document.getElementById("progress");
 const scoreEl = document.getElementById("score");
 const progressFillEl = document.getElementById("progressFill");
+const progressWrapEl = document.getElementById("progressWrap");
+const statusEl = document.getElementById("status");
+const setupPanelEl = document.getElementById("setupPanel");
 const cardEl = document.getElementById("card");
 const promptTypeEl = document.getElementById("promptType");
 const termEl = document.getElementById("term");
@@ -11,12 +14,14 @@ const choicesEl = document.getElementById("choices");
 const feedbackEl = document.getElementById("feedback");
 const nextBtn = document.getElementById("nextBtn");
 const skipBtn = document.getElementById("skipBtn");
+const endBtn = document.getElementById("endBtn");
 const doneEl = document.getElementById("done");
 const finalScoreEl = document.getElementById("finalScore");
 const scoreBreakdownEl = document.getElementById("scoreBreakdown");
 const restartBtn = document.getElementById("restartBtn");
 const startBtn = document.getElementById("startBtn");
 const modeSelect = document.getElementById("modeSelect");
+const questionCountSelect = document.getElementById("questionCountSelect");
 const errorEl = document.getElementById("error");
 
 let terms = [];
@@ -26,6 +31,7 @@ let usedIndices = new Set();
 let locked = false;
 let currentQuestion = null;
 let results = [];
+let quizQuestionCount = 15;
 
 function shuffle(arr) {
   const a = [...arr];
@@ -53,7 +59,7 @@ function parseTerms(raw) {
 }
 
 function getTotalQuestions() {
-  return Math.min(QUESTION_COUNT, terms.length);
+  return Math.min(quizQuestionCount, terms.length);
 }
 
 function setStatus() {
@@ -97,6 +103,7 @@ function renderQuestion() {
   feedbackEl.className = "feedback";
   nextBtn.disabled = true;
   skipBtn.disabled = false;
+  endBtn.disabled = false;
 
   const idx = pickUnusedIndex();
   if (idx === -1) {
@@ -146,6 +153,7 @@ function lockChoices() {
   });
 
   skipBtn.disabled = true;
+  endBtn.disabled = true;
 }
 
 function onAnswer(button, selected) {
@@ -197,6 +205,7 @@ function skipQuestion() {
 
 function breakdownHtml() {
   const total = getTotalQuestions();
+  const notReached = Math.max(0, total - results.length);
   const correct = results.filter((r) => r.status === "correct").length;
   const incorrect = results.filter((r) => r.status === "incorrect").length;
   const skipped = results.filter((r) => r.status === "skipped").length;
@@ -217,6 +226,7 @@ function breakdownHtml() {
       <li class="metric-correct">Correct: ${correct}</li>
       <li class="metric-wrong">Incorrect: ${incorrect}</li>
       <li class="metric-skipped">Skipped: ${skipped}</li>
+      <li>Not reached: ${notReached}</li>
       <li>Attempted accuracy: ${accuracy}%</li>
       <li>Total questions: ${total}</li>
     </ul>
@@ -233,6 +243,11 @@ function finishQuiz() {
   progressFillEl.style.width = "100%";
 }
 
+function endQuizEarly() {
+  if (cardEl.classList.contains("hidden")) return;
+  finishQuiz();
+}
+
 function nextQuestion() {
   asked += 1;
   if (asked >= getTotalQuestions()) {
@@ -243,7 +258,23 @@ function nextQuestion() {
   renderQuestion();
 }
 
-function restart() {
+function showSetupScreen() {
+  setupPanelEl.classList.remove("hidden");
+  statusEl.classList.add("hidden");
+  progressWrapEl.classList.add("hidden");
+  cardEl.classList.add("hidden");
+  doneEl.classList.add("hidden");
+  progressEl.textContent = "Question 0/0";
+  scoreEl.textContent = "Score: 0";
+  progressFillEl.style.width = "0%";
+}
+
+function startQuiz() {
+  setupPanelEl.classList.add("hidden");
+  statusEl.classList.remove("hidden");
+  progressWrapEl.classList.remove("hidden");
+  quizQuestionCount = Number.parseInt(questionCountSelect.value, 10) || QUESTION_COUNT;
+
   asked = 0;
   score = 0;
   usedIndices = new Set();
@@ -255,6 +286,27 @@ function restart() {
   cardEl.classList.remove("hidden");
   setStatus();
   renderQuestion();
+}
+
+function populateQuestionCountOptions() {
+  const defaults = [5, 10, 15, 20, 30, 50];
+  const max = terms.length;
+  const values = defaults.filter((n) => n <= max);
+  if (!values.includes(max)) values.push(max);
+  const uniqueSorted = [...new Set(values)].sort((a, b) => a - b);
+  questionCountSelect.innerHTML = "";
+
+  for (const value of uniqueSorted) {
+    const option = document.createElement("option");
+    option.value = String(value);
+    option.textContent = String(value);
+    if (value === 15) option.selected = true;
+    questionCountSelect.appendChild(option);
+  }
+
+  if (!uniqueSorted.includes(15) && uniqueSorted.length > 0) {
+    questionCountSelect.value = String(uniqueSorted[uniqueSorted.length - 1]);
+  }
 }
 
 function escapeHtml(text) {
@@ -280,8 +332,9 @@ async function init() {
       throw new Error("Need at least 4 valid term lines in words.txt");
     }
 
+    populateQuestionCountOptions();
     errorEl.classList.add("hidden");
-    restart();
+    showSetupScreen();
   } catch (err) {
     errorEl.classList.remove("hidden");
     errorEl.textContent = `${err.message}. Run this with a local web server.`;
@@ -290,7 +343,8 @@ async function init() {
 
 nextBtn.addEventListener("click", nextQuestion);
 skipBtn.addEventListener("click", skipQuestion);
-restartBtn.addEventListener("click", restart);
-startBtn.addEventListener("click", restart);
+endBtn.addEventListener("click", endQuizEarly);
+restartBtn.addEventListener("click", showSetupScreen);
+startBtn.addEventListener("click", startQuiz);
 
 init();

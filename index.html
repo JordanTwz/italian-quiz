@@ -14,21 +14,23 @@
     <h1>Italian Musical Terms Quiz</h1>
     <p class="subtitle">Practice in Italian to English, English to Italian, or Mixed mode.</p>
 
-    <section class="controls card">
+    <section id="setupPanel" class="controls card">
       <label for="modeSelect">Mode</label>
       <select id="modeSelect">
         <option value="it-en">Italian to English</option>
         <option value="en-it">English to Italian</option>
         <option value="mixed">Mixed</option>
       </select>
+      <label for="questionCountSelect">Questions</label>
+      <select id="questionCountSelect"></select>
       <button id="startBtn" class="btn">Start New Quiz</button>
     </section>
 
-    <section id="status" class="status">
+    <section id="status" class="status hidden">
       <span id="progress">Question 0/0</span>
       <span id="score">Score: 0</span>
     </section>
-    <div class="progressWrap" aria-label="Quiz progress">
+    <div id="progressWrap" class="progressWrap hidden" aria-label="Quiz progress">
       <div id="progressFill" class="progressFill"></div>
     </div>
 
@@ -40,6 +42,7 @@
       <div class="actions">
         <button id="skipBtn" class="btn secondary">Skip</button>
         <button id="nextBtn" class="btn" disabled>Next</button>
+        <button id="endBtn" class="btn danger">End Quiz</button>
       </div>
     </section>
 
@@ -47,7 +50,7 @@
       <h2>Quiz Complete</h2>
       <p id="finalScore"></p>
       <div id="scoreBreakdown"></div>
-      <button id="restartBtn" class="btn">Play Again</button>
+      <button id="restartBtn" class="btn">Start New Quiz</button>
     </section>
 
     <p id="error" class="error hidden"></p>

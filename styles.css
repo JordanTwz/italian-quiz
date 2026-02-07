@@ -179,6 +179,7 @@ h1 {
 .actions {
   display: flex;
   gap: 0.65rem;
+  align-items: center;
 }
 
 .btn {
@@ -194,6 +195,18 @@ h1 {
 
 .btn.secondary {
   background: #6b7280;
+}
+
+.btn.danger {
+  margin-left: auto;
+  background: #c2410c;
+}
+
+.btn.danger:disabled {
+  opacity: 1;
+  background: #9a3412;
+  filter: saturate(0.45) brightness(0.85);
+  cursor: not-allowed;
 }
 
 .btn:disabled {
@@ -263,9 +276,13 @@ h1 {
 }
 
 @media (max-width: 680px) {
-  .controls,
-  .actions {
+  .controls {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .actions {
+    flex-direction: row;
+    align-items: center;
   }
 }

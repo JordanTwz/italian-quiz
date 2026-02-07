@@ -4,21 +4,27 @@ const CHOICE_COUNT = 4;
 const progressEl = document.getElementById("progress");
 const scoreEl = document.getElementById("score");
 const cardEl = document.getElementById("card");
+const promptTypeEl = document.getElementById("promptType");
 const termEl = document.getElementById("term");
 const choicesEl = document.getElementById("choices");
 const feedbackEl = document.getElementById("feedback");
 const nextBtn = document.getElementById("nextBtn");
+const skipBtn = document.getElementById("skipBtn");
 const doneEl = document.getElementById("done");
 const finalScoreEl = document.getElementById("finalScore");
+const scoreBreakdownEl = document.getElementById("scoreBreakdown");
 const restartBtn = document.getElementById("restartBtn");
+const startBtn = document.getElementById("startBtn");
+const modeSelect = document.getElementById("modeSelect");
 const errorEl = document.getElementById("error");
 
 let terms = [];
 let asked = 0;
 let score = 0;
 let usedIndices = new Set();
-let currentAnswer = "";
 let locked = false;
+let currentQuestion = null;
+let results = [];
 
 function shuffle(arr) {
   const a = [...arr];
@@ -45,8 +51,12 @@ function parseTerms(raw) {
     .filter(Boolean);
 }
 
+function getTotalQuestions() {
+  return Math.min(QUESTION_COUNT, terms.length);
+}
+
 function setStatus() {
-  const total = Math.min(QUESTION_COUNT, terms.length);
+  const total = getTotalQuestions();
   progressEl.textContent = `Question ${Math.min(asked + 1, total)}/${total}`;
   scoreEl.textContent = `Score: ${score}`;
 }
@@ -61,10 +71,20 @@ function pickUnusedIndex() {
   return index;
 }
 
-function buildChoices(correctMeaning) {
-  const wrongPool = terms.map((t) => t.meaning).filter((m) => m !== correctMeaning);
-  const wrongChoices = shuffle(wrongPool).slice(0, CHOICE_COUNT - 1);
-  return shuffle([correctMeaning, ...wrongChoices]);
+function getDirection() {
+  const mode = modeSelect.value;
+  if (mode === "mixed") return Math.random() < 0.5 ? "it-en" : "en-it";
+  return mode;
+}
+
+function buildChoices(correct, pool) {
+  const uniquePool = [...new Set(pool.filter((item) => item !== correct))];
+  if (uniquePool.length < CHOICE_COUNT - 1) {
+    throw new Error("Not enough unique items to build multiple choice options");
+  }
+
+  const wrongChoices = shuffle(uniquePool).slice(0, CHOICE_COUNT - 1);
+  return shuffle([correct, ...wrongChoices]);
 }
 
 function renderQuestion() {
@@ -72,6 +92,7 @@ function renderQuestion() {
   feedbackEl.textContent = "";
   feedbackEl.className = "feedback";
   nextBtn.disabled = true;
+  skipBtn.disabled = false;
 
   const idx = pickUnusedIndex();
   if (idx === -1) {
@@ -80,11 +101,25 @@ function renderQuestion() {
   }
 
   const entry = terms[idx];
-  currentAnswer = entry.meaning;
-  termEl.textContent = entry.term;
+  const direction = getDirection();
+  const isItalianPrompt = direction === "it-en";
+  const prompt = isItalianPrompt ? entry.term : entry.meaning;
+  const answer = isItalianPrompt ? entry.meaning : entry.term;
+  const pool = isItalianPrompt ? terms.map((t) => t.meaning) : terms.map((t) => t.term);
+
+  currentQuestion = {
+    index: asked + 1,
+    direction,
+    prompt,
+    answer
+  };
+
+  promptTypeEl.textContent = direction === "it-en" ? "Italian to English" : "English to Italian";
+
+  termEl.textContent = prompt;
   choicesEl.innerHTML = "";
 
-  const choices = buildChoices(entry.meaning);
+  const choices = buildChoices(answer, pool);
   for (const choice of choices) {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -97,45 +132,106 @@ function renderQuestion() {
   setStatus();
 }
 
+function lockChoices() {
+  const allButtons = choicesEl.querySelectorAll("button");
+  allButtons.forEach((btn) => {
+    btn.disabled = true;
+    if (btn.textContent === currentQuestion.answer) {
+      btn.classList.add("correct");
+    }
+  });
+
+  skipBtn.disabled = true;
+}
+
 function onAnswer(button, selected) {
   if (locked) return;
   locked = true;
 
-  const allButtons = choicesEl.querySelectorAll("button");
-  allButtons.forEach((btn) => {
-    btn.disabled = true;
-    if (btn.textContent === currentAnswer) btn.classList.add("correct");
-  });
+  lockChoices();
 
-  if (selected === currentAnswer) {
+  const isCorrect = selected === currentQuestion.answer;
+  if (isCorrect) {
     score += 1;
     button.classList.add("correct");
     feedbackEl.textContent = "Correct";
     feedbackEl.classList.add("correct");
   } else {
     button.classList.add("wrong");
-    feedbackEl.textContent = `Incorrect. Correct answer: ${currentAnswer}`;
+    feedbackEl.textContent = `Incorrect. Correct answer: ${currentQuestion.answer}`;
     feedbackEl.classList.add("wrong");
   }
+
+  results.push({
+    ...currentQuestion,
+    status: isCorrect ? "correct" : "incorrect",
+    selected
+  });
 
   scoreEl.textContent = `Score: ${score}`;
   nextBtn.disabled = false;
 }
 
+function skipQuestion() {
+  if (locked || !currentQuestion) return;
+  locked = true;
+
+  lockChoices();
+  feedbackEl.textContent = `Skipped. Correct answer: ${currentQuestion.answer}`;
+  feedbackEl.classList.add("wrong");
+
+  results.push({
+    ...currentQuestion,
+    status: "skipped",
+    selected: "(Skipped)"
+  });
+
+  nextBtn.disabled = false;
+}
+
+function breakdownHtml() {
+  const total = getTotalQuestions();
+  const correct = results.filter((r) => r.status === "correct").length;
+  const incorrect = results.filter((r) => r.status === "incorrect").length;
+  const skipped = results.filter((r) => r.status === "skipped").length;
+  const attempted = correct + incorrect;
+  const accuracy = attempted === 0 ? 0 : Math.round((correct / attempted) * 100);
+
+  const detailRows = results
+    .filter((r) => r.status !== "correct")
+    .map(
+      (r) =>
+        `<tr><td>${r.index}</td><td>${r.direction}</td><td>${escapeHtml(r.prompt)}</td><td>${escapeHtml(r.selected)}</td><td>${escapeHtml(r.answer)}</td></tr>`
+    )
+    .join("");
+
+  return `
+    <ul>
+      <li>Correct: ${correct}</li>
+      <li>Incorrect: ${incorrect}</li>
+      <li>Skipped: ${skipped}</li>
+      <li>Attempted accuracy: ${accuracy}%</li>
+      <li>Total questions: ${total}</li>
+    </ul>
+    ${detailRows ? `<table><thead><tr><th>#</th><th>Mode</th><th>Question</th><th>Your answer</th><th>Correct answer</th></tr></thead><tbody>${detailRows}</tbody></table>` : ""}
+  `;
+}
+
 function finishQuiz() {
   cardEl.classList.add("hidden");
   doneEl.classList.remove("hidden");
-  finalScoreEl.textContent = `Final score: ${score}/${Math.min(QUESTION_COUNT, terms.length)}`;
+  finalScoreEl.textContent = `Final score: ${score}/${getTotalQuestions()}`;
+  scoreBreakdownEl.innerHTML = breakdownHtml();
   progressEl.textContent = "Question complete";
 }
 
 function nextQuestion() {
   asked += 1;
-  const total = Math.min(QUESTION_COUNT, terms.length);
-  if (asked >= total) {
+  if (asked >= getTotalQuestions()) {
     finishQuiz();
     return;
   }
+
   renderQuestion();
 }
 
@@ -143,16 +239,31 @@ function restart() {
   asked = 0;
   score = 0;
   usedIndices = new Set();
+  locked = false;
+  currentQuestion = null;
+  results = [];
+
   doneEl.classList.add("hidden");
   cardEl.classList.remove("hidden");
   setStatus();
   renderQuestion();
 }
 
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 async function init() {
   try {
     const response = await fetch("words.txt", { cache: "no-store" });
-    if (!response.ok) throw new Error(`Failed to load words.txt (${response.status})`);
+    if (!response.ok) {
+      throw new Error(`Failed to load words.txt (${response.status})`);
+    }
 
     const raw = await response.text();
     terms = parseTerms(raw);
@@ -161,7 +272,7 @@ async function init() {
       throw new Error("Need at least 4 valid term lines in words.txt");
     }
 
-    cardEl.classList.remove("hidden");
+    errorEl.classList.add("hidden");
     restart();
   } catch (err) {
     errorEl.classList.remove("hidden");
@@ -170,6 +281,8 @@ async function init() {
 }
 
 nextBtn.addEventListener("click", nextQuestion);
+skipBtn.addEventListener("click", skipQuestion);
 restartBtn.addEventListener("click", restart);
+startBtn.addEventListener("click", restart);
 
 init();

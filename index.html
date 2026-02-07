@@ -1,0 +1,37 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Italian Musical Terms Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <h1>Italian Musical Terms Quiz</h1>
+    <p class="subtitle">Choose the correct English meaning.</p>
+
+    <section id="status" class="status">
+      <span id="progress">Question 0/0</span>
+      <span id="score">Score: 0</span>
+    </section>
+
+    <section id="card" class="card hidden">
+      <h2 id="term"></h2>
+      <div id="choices" class="choices"></div>
+      <p id="feedback" class="feedback"></p>
+      <button id="nextBtn" class="btn" disabled>Next</button>
+    </section>
+
+    <section id="done" class="card hidden">
+      <h2>Quiz complete</h2>
+      <p id="finalScore"></p>
+      <button id="restartBtn" class="btn">Play again</button>
+    </section>
+
+    <p id="error" class="error hidden"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+﻿A tempo	In time
+Accelerando (Accel)	Gradually getting faster
+Ad libitum (Ad lib.)	At choice
+Adagio	Slow
+Affettuoso	Tenderly
+Agitato	Agitated
+Al, alla	In the style of
+Alla breve	With a minim beat
+Allargando	Broadening
+Allegretto	Fairly quick
+Allegro	Fast
+Allegro assai	Very fast
+Allegro moderato	Moderately fast
+Amabile	Amiable, pleasant
+Andante	At a walking pace
+Andantino	Slightly faster than andante
+Animato	Animated, lively
+Animé	Animated, lively
+Appassionato	With passion
+Assai	Very
+Attacca	Go immediately to next section
+Ben	Well
+Brio	Vigour
+Cantabile	In a singing style
+Cantando	Singing
+Come	As, similar to
+Comodo	At a comfortable speed
+Con, col	With
+Crescendo (Cresc.)	Gradually getting louder
+Da capo (D.C.)	Repeat from beginning
+Dal segno (D.S.)	Repeat from "S" sign
+Deciso	With determination
+Decrescendo (Decresc.)	Gradually getting quieter
+Diminuendo (Dim.)	Gradually getting quieter
+Dolce	Sweet, soft
+Dolore	Grief, sorrow
+Doloroso	Sorrowful
+Douce	Sweet
+E, ed	And
+Energico	Energetic
+Espressivo (espress.)	Expressive
+Fine	The end
+Forte (f)	Loud
+Fortepiano (fp)	Loud, then immediately soft
+Fortissimo (ff)	Very Loud
+Forza	Force
+Giocoso	Playful, merry
+Grave	Very slow, solemn
+Grazioso	Graceful
+Langsam	Slow
+Largamente	Broadly
+Larghetto	Rather slow
+Largo	Slow and stately
+Lebhaft	Lively
+Legato	Smoothly
+Leggiero	Light, nimble
+Lent	Slow
+Lento	Slow
+Ma	But
+Maestoso	Majestic
+Marcato (marc.)	Emphatic, accented
+Marcia	March
+Mäßig	At a moderate speed
+Meno	Less
+Mesto	Sad
+Mezzo	Half
+Mezzo forte (mf)	Moderately loud
+Mezzo piano (mp)	Moderately quiet
+Misterioso	Mysteriously
+Moderato	Moderate speed
+Modéré	At a moderate speed
+Molto	Very much
+Morendo	Dying away
+Mosso	Movement
+Moto	Movement
+Niente	Nothing (silence)
+Non	Not
+Perdendosi	Dying away
+Pesante	Heavy
+Pianissimo (pp)	Very quiet
+Piano (p)	Quiet
+Più	More
+Poco	A little
+Poco a poco	Little by little
+Prestissimo	As fast as possible
+Presto	Fast (faster than allegro)
+Prima, primo	First
+Quasi	As if, resembling
+Rallentando (Rall.)	Gradually getting slower
+Retenu	Held back
+Rinforzando (rf, rfz, rinf.)	Reinforcing
+Risoluto	Bold, strong
+Ritardando (rit., ritard.)	Gradually getting slower
+Ritenuto (rit., riten.)	Held back
+Ritmico	Rhythmically
+Rubato	With some freedom of time
+Ruhig	Peaceful
+Scherzando	Playfully, joking
+Schnell	Fast
+Semplice	Simple, plain
+Sempre	Always
+Senza	Without
+Sforzando (sf)	Forced, accented
+Sforzato (sfz)	Forced, accented
+Simile (sim.)	In the same way
+Smorzando (smorz.)	Dying away in tone and speed
+Sonoro	Resonant, with a rich tone
+Sostenuto	Sustained
+Sotto voce	In an undertone
+Spirito	Spirit
+Staccato (stacc.)	Detached
+Stringendo	Gradually getting faster
+Subito (sub.)	Suddenly
+Tempo	Speed, time
+Tenuto	Held
+Tranquillo	Calm
+Traurig	Sad
+Tristamente, Triste	Sorrowful
+Troppo	Too much
+Vite	Quick
+Vivace, vivo	Lively, quick

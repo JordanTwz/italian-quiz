@@ -68,6 +68,22 @@ h1 {
   font-weight: 600;
 }
 
+.progressWrap {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressFill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #1d6b4d, #2a9d68);
+  transition: width 160ms ease;
+}
+
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -99,11 +115,15 @@ h1 {
   background: #fff;
   color: var(--text);
   border-radius: 10px;
-  padding: 0.8rem;
+  padding: 1rem 1.05rem;
+  padding-right: 2.6rem;
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.08rem;
+  line-height: 1.35;
+  min-height: 62px;
   cursor: pointer;
   font-family: var(--font-music);
+  position: relative;
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
@@ -117,9 +137,29 @@ h1 {
   background: #eaf9ea;
 }
 
+.choice.correct::after {
+  content: "✓";
+  color: var(--correct);
+  font-weight: 800;
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .choice.wrong {
   border-color: var(--wrong);
   background: #fde9e9;
+}
+
+.choice.wrong::after {
+  content: "✗";
+  color: var(--wrong);
+  font-weight: 800;
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .feedback {
@@ -183,6 +223,34 @@ h1 {
   padding: 0.45rem;
   text-align: left;
   vertical-align: top;
+}
+
+
+#scoreBreakdown .metric-correct {
+  color: var(--correct);
+  font-weight: 700;
+}
+
+#scoreBreakdown .metric-wrong {
+  color: var(--wrong);
+  font-weight: 700;
+}
+
+#scoreBreakdown .metric-skipped {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+#scoreBreakdown tr.row-incorrect {
+  background: #fde9e9;
+}
+
+#scoreBreakdown tr.row-correct {
+  background: #eaf9ea;
+}
+
+#scoreBreakdown tr.row-skipped {
+  background: #f3f4f6;
 }
 
 .error {

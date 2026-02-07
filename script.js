@@ -3,6 +3,7 @@ const CHOICE_COUNT = 4;
 
 const progressEl = document.getElementById("progress");
 const scoreEl = document.getElementById("score");
+const progressFillEl = document.getElementById("progressFill");
 const cardEl = document.getElementById("card");
 const promptTypeEl = document.getElementById("promptType");
 const termEl = document.getElementById("term");
@@ -59,6 +60,9 @@ function setStatus() {
   const total = getTotalQuestions();
   progressEl.textContent = `Question ${Math.min(asked + 1, total)}/${total}`;
   scoreEl.textContent = `Score: ${score}`;
+  const completed = results.length;
+  const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+  progressFillEl.style.width = `${pct}%`;
 }
 
 function pickUnusedIndex() {
@@ -169,6 +173,7 @@ function onAnswer(button, selected) {
   });
 
   scoreEl.textContent = `Score: ${score}`;
+  setStatus();
   nextBtn.disabled = false;
 }
 
@@ -186,6 +191,7 @@ function skipQuestion() {
     selected: "(Skipped)"
   });
 
+  setStatus();
   nextBtn.disabled = false;
 }
 
@@ -198,18 +204,19 @@ function breakdownHtml() {
   const accuracy = attempted === 0 ? 0 : Math.round((correct / attempted) * 100);
 
   const detailRows = results
-    .filter((r) => r.status !== "correct")
-    .map(
-      (r) =>
-        `<tr><td>${r.index}</td><td>${r.direction}</td><td>${escapeHtml(r.prompt)}</td><td>${escapeHtml(r.selected)}</td><td>${escapeHtml(r.answer)}</td></tr>`
-    )
+    .map((r) => {
+      let rowClass = "row-skipped";
+      if (r.status === "correct") rowClass = "row-correct";
+      if (r.status === "incorrect") rowClass = "row-incorrect";
+      return `<tr class="${rowClass}"><td>${r.index}</td><td>${r.direction}</td><td>${escapeHtml(r.prompt)}</td><td>${escapeHtml(r.selected)}</td><td>${escapeHtml(r.answer)}</td></tr>`;
+    })
     .join("");
 
   return `
     <ul>
-      <li>Correct: ${correct}</li>
-      <li>Incorrect: ${incorrect}</li>
-      <li>Skipped: ${skipped}</li>
+      <li class="metric-correct">Correct: ${correct}</li>
+      <li class="metric-wrong">Incorrect: ${incorrect}</li>
+      <li class="metric-skipped">Skipped: ${skipped}</li>
       <li>Attempted accuracy: ${accuracy}%</li>
       <li>Total questions: ${total}</li>
     </ul>
@@ -223,6 +230,7 @@ function finishQuiz() {
   finalScoreEl.textContent = `Final score: ${score}/${getTotalQuestions()}`;
   scoreBreakdownEl.innerHTML = breakdownHtml();
   progressEl.textContent = "Question complete";
+  progressFillEl.style.width = "100%";
 }
 
 function nextQuestion() {

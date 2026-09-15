@@ -1,121 +1,236 @@
-﻿A tempo	In time
-Accelerando (Accel)	Gradually getting faster
-Ad libitum (Ad lib.)	At choice
-Adagio	Slow
-Affettuoso	Tenderly
-Agitato	Agitated
-Al, alla	In the style of
-Alla breve	With a minim beat
-Allargando	Broadening
-Allegretto	Fairly quick
-Allegro	Fast
-Allegro assai	Very fast
-Allegro moderato	Moderately fast
-Amabile	Amiable, pleasant
-Andante	At a walking pace
-Andantino	Slightly faster than andante
-Animato	Animated, lively
-Animé	Animated, lively
-Appassionato	With passion
-Assai	Very
-Attacca	Go immediately to next section
-Ben	Well
-Brio	Vigour
-Cantabile	In a singing style
-Cantando	Singing
-Come	As, similar to
-Comodo	At a comfortable speed
-Con, col	With
-Crescendo (Cresc.)	Gradually getting louder
-Da capo (D.C.)	Repeat from beginning
-Dal segno (D.S.)	Repeat from "S" sign
-Deciso	With determination
-Decrescendo (Decresc.)	Gradually getting quieter
-Diminuendo (Dim.)	Gradually getting quieter
-Dolce	Sweet, soft
-Dolore	Grief, sorrow
-Doloroso	Sorrowful
-Douce	Sweet
-E, ed	And
-Energico	Energetic
-Espressivo (espress.)	Expressive
-Fine	The end
-Forte (f)	Loud
-Fortepiano (fp)	Loud, then immediately soft
-Fortissimo (ff)	Very Loud
-Forza	Force
-Giocoso	Playful, merry
-Grave	Very slow, solemn
-Grazioso	Graceful
-Langsam	Slow
-Largamente	Broadly
-Larghetto	Rather slow
-Largo	Slow and stately
-Lebhaft	Lively
-Legato	Smoothly
-Leggiero	Light, nimble
-Lent	Slow
-Lento	Slow
-Ma	But
-Maestoso	Majestic
-Marcato (marc.)	Emphatic, accented
-Marcia	March
-Mäßig	At a moderate speed
-Meno	Less
-Mesto	Sad
-Mezzo	Half
-Mezzo forte (mf)	Moderately loud
-Mezzo piano (mp)	Moderately quiet
-Misterioso	Mysteriously
-Moderato	Moderate speed
-Modéré	At a moderate speed
-Molto	Very much
-Morendo	Dying away
-Mosso	Movement
-Moto	Movement
-Niente	Nothing (silence)
-Non	Not
-Perdendosi	Dying away
-Pesante	Heavy
-Pianissimo (pp)	Very quiet
-Piano (p)	Quiet
-Più	More
-Poco	A little
-Poco a poco	Little by little
-Prestissimo	As fast as possible
-Presto	Fast (faster than allegro)
-Prima, primo	First
-Quasi	As if, resembling
-Rallentando (Rall.)	Gradually getting slower
-Retenu	Held back
-Rinforzando (rf, rfz, rinf.)	Reinforcing
-Risoluto	Bold, strong
-Ritardando (rit., ritard.)	Gradually getting slower
-Ritenuto (rit., riten.)	Held back
-Ritmico	Rhythmically
-Rubato	With some freedom of time
-Ruhig	Peaceful
-Scherzando	Playfully, joking
-Schnell	Fast
-Semplice	Simple, plain
-Sempre	Always
-Senza	Without
-Sforzando (sf)	Forced, accented
-Sforzato (sfz)	Forced, accented
-Simile (sim.)	In the same way
-Smorzando (smorz.)	Dying away in tone and speed
-Sonoro	Resonant, with a rich tone
-Sostenuto	Sustained
-Sotto voce	In an undertone
-Spirito	Spirit
-Staccato (stacc.)	Detached
-Stringendo	Gradually getting faster
-Subito (sub.)	Suddenly
-Tempo	Speed, time
-Tenuto	Held
-Tranquillo	Calm
-Traurig	Sad
-Tristamente, Triste	Sorrowful
-Troppo	Too much
-Vite	Quick
-Vivace, vivo	Lively, quick
+1	A tempo	In time
+1	Accelerando (accel.)	Gradually getting faster
+1	Adagio	Slow
+1	Allegretto	Fairly quick
+1	Allegro	Quick
+1	Andante	At a medium or walking pace
+1	Cantabile	In a singing style
+1	Crescendo (cresc.)	Gradually getting louder
+1	Da capo (D.C.)	Repeat from the beginning
+1	Decrescendo (decresc.)	Gradually getting quieter
+1	Diminuendo (dim.)	Gradually getting quieter
+1	Dolce	Sweet
+1	Forte (f)	Loud
+1	Fortissimo (ff)	Very loud
+1	Fine	The end
+1	Al fine	To the end
+1	Legato	Smoothly
+1	Mezzo forte (mf)	Moderately loud
+1	Moderato	At a moderate speed
+1	Mezzo piano (mp)	Moderately quiet
+1	Piano (p)	Quiet
+1	Pianissimo (pp)	Very quiet
+1	Rallentando (rall.)	Gradually getting slower
+1	Ritardando (ritard., rit.)	Gradually getting slower
+1	Staccato (stacc.)	Detached
+2	Alla marcia	In the style of a march
+2	Allargando	Broadening
+2	Con moto	With movement
+2	Con, col	With
+2	Dal segno (D.S.)	Repeat from the sign
+2	E, ed	And
+2	Espressivo (espress.)	Expressive
+2	Fortepiano (fp)	Loud, then immediately soft
+2	Grave	Very slow and solemn
+2	Grazioso	Graceful
+2	Largo	Slow and stately
+2	Lento	Slow
+2	Ma	But
+2	Meno	Less
+2	Meno mosso	Less movement; slower
+2	Molto	Very; much
+2	Non troppo	Not too much
+2	Più	More
+2	Più mosso	More movement; quicker
+2	Poco	A little
+2	Poco a poco	Little by little
+2	Presto	Fast
+2	Ritenuto (riten., rit.)	Held back
+2	Senza	Without
+2	Vivace, vivo	Lively; quick
+3	Agitato	Agitated
+3	Andantino	Slightly faster than andante
+3	Animato	Animated; lively
+3	Ben	Well
+3	Con forza	With force
+3	Energico	Energetic
+3	Giocoso	Playful; merry
+3	Leggiero	Light
+3	Maestoso	Majestic
+3	Marcato (marc.)	Emphatic; accented
+3	Pesante	Heavy
+3	Prestissimo	Very fast
+3	Prima, primo	First
+3	Risoluto	Bold; strong
+3	Scherzando	Playful; joking
+3	Semplice	Simple; plain
+3	Sempre	Always
+3	Sforzando, sforzato (sfz, sf)	Forced; accented
+3	Simile (sim.)	In the same way
+3	Sostenuto (sost.)	Sustained
+3	Subito (sub.)	Suddenly
+3	Tranquillo	Calm
+3	Triste, tristamente	Sad; sorrowful
+4	Affettuoso	Tenderly
+4	Alla breve	With a minim beat
+4	Amabile	Pleasant
+4	Appassionato	With passion
+4	Assai	Very
+4	Come prima	As before
+4	Comodo, tempo comodo	At a comfortable speed
+4	Con brio	With vigour; lively
+4	Deciso	With determination
+4	Larghetto	Rather slow
+4	Mesto	Sad
+4	Misterioso	Mysteriously
+4	Ritmico	Rhythmically
+4	Rubato, tempo rubato	With some freedom of time
+4	Stringendo	Gradually getting faster
+4	Animé	Animated; lively
+4	Douce	Sweet
+4	Lent	Slow
+4	Modéré	At a moderate speed
+4	Retenu	Held back
+4	Vite	Quick
+5	A niente	To nothing
+5	Ad libitum (ad lib.)	At choice
+5	Attacca	Go straight on
+5	Cantando	Singing
+5	Con dolore	With grief
+5	Con spirito	With spirit
+5	Doloroso	Sorrowful
+5	Largamente	Broadly
+5	Morendo	Dying away
+5	Perdendosi	Dying away
+5	Quasi	As if; resembling
+5	Rinforzando (rf, rfz, rinf.)	Reinforcing
+5	Smorzando (smorz.)	Dying away
+5	Sonoro	Resonant; with a rich tone
+5	Sotto voce	In an undertone
+5	Langsam	Slow
+5	Lebhaft	Lively
+5	Mässig	At a moderate speed
+5	Ruhig	Peaceful
+5	Schnell	Fast
+5	Traurig	Sad
+6	Adagietto	Rather slow
+6	Affrettando	Hurrying
+6	Amore	Love
+6	A piacere	At pleasure
+6	Calando	Becoming softer and slower
+6	Delicato	Delicately
+6	Dolcissimo (dolciss.)	Very sweetly
+6	Dolente	Sorrowful
+6	Giusto	Exact; strict
+6	Marziale	In a martial style
+6	Mezza voce	With half the voice; moderately soft
+6	Possibile	Possible
+6	Prestissimo	As fast as possible
+6	Seconda, secondo	Second
+6	Soave	Gently
+6	Spiritoso	Spirited
+6	Strepitoso	Noisy; boisterous
+6	Tanto	So much
+6	Teneramente	Tenderly
+6	Tenerezza	Tenderness
+6	Tenuto	Held
+6	Volta	Time
+6	À	At; to; in
+6	Avec	With
+6	Doux	Sweet; gentle
+6	Encore	Again
+6	Et	And
+6	Non	No; not
+6	Peu	Little
+6	Plus	More
+6	Sans	Without
+6	Très	Very
+6	Un, une	One; a
+6	Ausdruck, ausdrucksvoll	Expression; expressively
+6	Ein	One; a
+6	Etwas	Somewhat
+6	Geschwind	Quick
+6	Langsamer	Slower
+6	Mit	With
+6	Nicht	Not
+6	Ohne	Without
+6	Rasch	Quick
+6	Sehr	Very
+6	Und	And
+6	Ziemlich	Fairly; rather
+6	Zu	To; too
+7	Brillante	Brilliant
+7	Colla parte	Follow the leading part
+7	Facile	Easy
+7	Fuoco	Fire
+7	Legg. (leggiero)	Light
+7	L'istesso	The same
+7	Lunga, lunga pausa	Long; a long pause
+7	Marc. (marcato)	Emphatic; accented
+7	Ossia	Or; alternatively
+7	Piacevole	Pleasant
+7	Pochettino (poch.)	Very little
+7	Pochissimo (pochiss.)	Very little
+7	Segue	Continue
+7	Sopra	Above
+7	Veloce	Swift; fast
+7	1er mouvt. (mouvement)	First or original tempo
+7	Assez	Enough; fairly
+7	Au mouvt. (mouvement)	At the previous tempo
+7	Cédez	Yield; slow down
+7	En animant	Becoming more animated
+7	En serrant	Pressing on; getting faster
+7	Mais	But
+7	Moins	Less
+7	Ralentir	Slow down
+7	Sonore	Resonant
+7	Vif	Lively
+7	Aber	But
+7	Doch	But; yet
+7	Empfindung	Feeling
+7	Fröhlich	Cheerful
+7	Gesangvoll	In a singing style
+7	Langsamer als	Slower than
+7	Süss	Sweet
+7	Voll	Full
+7	Zart	Tender; delicate
+8	Affretare (affrettando)	Hasten; hurrying
+8	Ancora	Again
+8	Brioso	With spirit; vigorous
+8	Calma	Calmness
+8	Calmato	Calmed
+8	Doppio movimento	Twice as fast
+8	Estinto	Extinguished; as soft as possible
+8	Incalzando	Pressing on; getting faster and louder
+8	Lacrimoso	Tearful; sorrowful
+8	Legatissimo	Very smoothly
+8	Loco	At the written pitch
+8	Lusingando	Coaxingly; caressingly
+8	Mancando	Dying away
+8	Misura	Measure; bar
+8	Nobilmente	Nobly
+8	Parlando	In a speaking style
+8	Piangevole	Plaintively; sorrowfully
+8	Precipitando	Rushing; headlong
+8	Scherzo, scherzoso	Joke; playful
+8	Stretto	Quickening
+8	Tosto	Quickly
+8	Volante	Flying; very fast
+8	En dehors	Prominently; brought out
+8	Légèrement	Lightly
+8	Modérément	Moderately
+8	Peu à peu	Little by little
+8	Presser, pressez	Hurry; quicken
+8	Bewegt	With movement; agitated
+8	Breit	Broad
+8	Einfach	Simple
+8	Gesprochen	Spoken
+8	Immer	Always
+8	Lebhafter	Livelier
+8	Leicht	Light
+8	Leise	Soft
+8	Ruhiger	Calmer; slower
+8	Schleppend	Dragging
+8	Schneller	Faster
+8	Wenig	Little
+8	Wieder	Again

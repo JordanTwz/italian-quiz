@@ -29,9 +29,12 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   color: var(--ink);
   font-family: var(--font-ui);
   background:
@@ -39,6 +42,7 @@ body {
     radial-gradient(circle at 92% 88%, rgba(21, 107, 89, 0.13), transparent 31rem),
     linear-gradient(135deg, #f8f6ef 0%, var(--canvas) 100%);
   padding: clamp(1.25rem, 4vw, 3.5rem) 1rem;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
 }
 
 button,
@@ -47,6 +51,9 @@ select {
 }
 
 .app {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   width: min(820px, 100%);
   margin: 0 auto;
   overflow-wrap: anywhere;
@@ -61,6 +68,15 @@ select {
 
 .hero > div:last-child {
   min-width: 0;
+}
+
+.footer {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 10;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  color: var(--muted);
+  text-align: center;
 }
 
 .eyebrow {
@@ -433,6 +449,17 @@ h2 {
   background: var(--correct);
 }
 
+.choice.skipped {
+  border-color: var(--gold);
+  background: #fbefcf;
+}
+
+.choice.skipped::before {
+  border-color: #725113;
+  color: #fff;
+  background: #725113;
+}
+
 .choice.correct::after,
 .choice.wrong::after {
   position: absolute;
@@ -460,7 +487,7 @@ h2 {
 }
 
 .choice.wrong::after {
-  content: "×";
+  content: "✗";
   color: var(--wrong);
 }
 
@@ -468,6 +495,11 @@ h2 {
   min-height: 1.5rem;
   margin: 1rem 0 0.75rem;
   font-weight: 700;
+}
+
+.feedback:empty {
+  min-height: 0;
+  margin: 0 0 1rem;
 }
 
 .feedback.correct {
@@ -559,6 +591,13 @@ h2 {
   border-right: 0;
 }
 
+#scoreBreakdown th:nth-child(2),
+#scoreBreakdown td:nth-child(2),
+#scoreBreakdown th:nth-child(3),
+#scoreBreakdown td:nth-child(3) {
+  white-space: nowrap;
+}
+
 #scoreBreakdown tbody tr:last-child td {
   border-bottom: 0;
 }
@@ -573,16 +612,22 @@ h2 {
 
 #scoreBreakdown .metric-correct {
   color: var(--correct);
+  border-color: #76ad8d;
+  background: var(--correct-soft);
   font-weight: 700;
 }
 
 #scoreBreakdown .metric-wrong {
   color: var(--wrong);
+  border-color: #da8f88;
+  background: var(--wrong-soft);
   font-weight: 700;
 }
 
 #scoreBreakdown .metric-skipped {
-  color: var(--muted);
+  color: #725113;
+  border-color: var(--gold);
+  background: #fbefcf;
   font-weight: 700;
 }
 
@@ -595,7 +640,7 @@ h2 {
 }
 
 #scoreBreakdown tr.row-skipped {
-  background: #f4f5f2;
+  background: #fbefcf;
 }
 
 .error {
@@ -657,7 +702,7 @@ h2 {
 
 @media (max-width: 640px) {
   body {
-    padding: 1.2rem 0.75rem 2rem;
+    padding: 1.2rem 0.75rem calc(5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .hero {
@@ -694,13 +739,15 @@ h2 {
   }
 
   .status {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .status .contextChip {
+    grid-column: 1 / -1;
   }
 
   .statusScore {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    justify-content: space-between;
     text-align: left;
   }
 

@@ -197,12 +197,12 @@ function renderQuestion() {
   setStatus();
 }
 
-function lockChoices() {
+function lockChoices(answerClass = "correct") {
   const allButtons = choicesEl.querySelectorAll("button");
   allButtons.forEach((btn) => {
     btn.disabled = true;
     if (btn.textContent === currentQuestion.answer) {
-      btn.classList.add("correct");
+      btn.classList.add(answerClass);
     }
   });
 
@@ -220,12 +220,8 @@ function onAnswer(button, selected) {
   if (isCorrect) {
     score += 1;
     button.classList.add("correct");
-    feedbackEl.textContent = "Correct";
-    feedbackEl.classList.add("correct");
   } else {
     button.classList.add("wrong");
-    feedbackEl.textContent = "Incorrect";
-    feedbackEl.classList.add("wrong");
   }
 
   results.push({
@@ -243,9 +239,7 @@ function skipQuestion() {
   if (locked || !currentQuestion) return;
   locked = true;
 
-  lockChoices();
-  feedbackEl.textContent = "Skipped";
-  feedbackEl.classList.add("wrong");
+  lockChoices("skipped");
 
   results.push({
     ...currentQuestion,

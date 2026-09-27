@@ -589,10 +589,8 @@ h2 {
   border-right: 0;
 }
 
-#scoreBreakdown th:nth-child(2),
-#scoreBreakdown td:nth-child(2),
-#scoreBreakdown th:nth-child(3),
-#scoreBreakdown td:nth-child(3) {
+#scoreBreakdown th,
+#scoreBreakdown td {
   white-space: nowrap;
 }
 

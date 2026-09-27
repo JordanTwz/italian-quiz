@@ -324,7 +324,7 @@ function finishQuiz() {
   doneEl.classList.remove("hidden");
   finalScoreEl.textContent = `Final score: ${score}/${getTotalQuestions()}`;
   scoreBreakdownEl.innerHTML = breakdownHtml();
-  progressEl.textContent = "Question complete";
+  progressEl.textContent = "Complete";
   progressFillEl.style.width = "100%";
   if (getTotalQuestions() > 0 && score === getTotalQuestions()) launchConfetti();
 }

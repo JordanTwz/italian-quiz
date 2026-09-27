@@ -41,23 +41,6 @@ body {
   padding: clamp(1.25rem, 4vw, 3.5rem) 1rem;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.22;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 31px,
-    rgba(24, 36, 34, 0.08) 32px,
-    transparent 33px
-  );
-  mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
-}
-
 button,
 select {
   font: inherit;
@@ -185,7 +168,14 @@ h2 {
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.field select:hover {
+.field select:disabled {
+  color: var(--muted);
+  background: #eef0eb;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.field select:hover:enabled {
   border-color: #9eaaa5;
 }
 
@@ -259,11 +249,12 @@ h2 {
 
 .btn.textDanger {
   margin-left: auto;
-  color: var(--wrong);
+  color: #fff;
+  background: var(--wrong);
 }
 
 .btn.textDanger:hover:enabled {
-  background: var(--wrong-soft);
+  background: #922f2c;
 }
 
 .btn:disabled {

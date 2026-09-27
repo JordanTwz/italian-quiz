@@ -224,7 +224,7 @@ function onAnswer(button, selected) {
     feedbackEl.classList.add("correct");
   } else {
     button.classList.add("wrong");
-    feedbackEl.textContent = `Incorrect. Correct answer: ${currentQuestion.answer}`;
+    feedbackEl.textContent = "Incorrect";
     feedbackEl.classList.add("wrong");
   }
 
@@ -244,7 +244,7 @@ function skipQuestion() {
   locked = true;
 
   lockChoices();
-  feedbackEl.textContent = `Skipped. Correct answer: ${currentQuestion.answer}`;
+  feedbackEl.textContent = "Skipped";
   feedbackEl.classList.add("wrong");
 
   results.push({
@@ -386,6 +386,9 @@ function startQuiz() {
 }
 
 function populateQuestionCountOptions() {
+  scopeSelect.disabled = gradeSelect.value === "1";
+  if (scopeSelect.disabled) scopeSelect.value = "grade-only";
+
   const defaults = [5, 10, 15, 20, 30, 50];
   const selectedTerms = getTermsForSelection();
   const max = selectedTerms.length;

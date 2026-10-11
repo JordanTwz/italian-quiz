@@ -252,13 +252,10 @@ function skipQuestion() {
 }
 
 function breakdownHtml() {
-  const total = getTotalQuestions();
-  const notReached = Math.max(0, total - results.length);
+  const incomplete = Math.max(0, getTotalQuestions() - results.length);
   const correct = results.filter((r) => r.status === "correct").length;
   const incorrect = results.filter((r) => r.status === "incorrect").length;
   const skipped = results.filter((r) => r.status === "skipped").length;
-  const attempted = correct + incorrect;
-  const accuracy = attempted === 0 ? 0 : Math.round((correct / attempted) * 100);
 
   const detailRows = results
     .map((r) => {
@@ -271,14 +268,12 @@ function breakdownHtml() {
 
   return `
     <ul>
-      <li class="metric-correct">Correct: ${correct}</li>
-      <li class="metric-wrong">Incorrect: ${incorrect}</li>
-      <li class="metric-skipped">Skipped: ${skipped}</li>
-      <li>Not reached: ${notReached}</li>
-      <li>Attempted accuracy: ${accuracy}%</li>
-      <li>Total questions: ${total}</li>
+      <li class="metric-correct"><span>Correct</span> <strong>${correct}</strong></li>
+      <li class="metric-wrong"><span>Incorrect</span> <strong>${incorrect}</strong></li>
+      <li class="metric-skipped"><span>Skipped</span> <strong>${skipped}</strong></li>
+      <li class="metric-incomplete"><span>Incomplete</span> <strong>${incomplete}</strong></li>
     </ul>
-    ${detailRows ? `<table><thead><tr><th>#</th><th>Grade</th><th>Language</th><th>Mode</th><th>Question</th><th>Your answer</th><th>Correct answer</th></tr></thead><tbody>${detailRows}</tbody></table>` : ""}
+    ${detailRows ? `<div class="resultsTableScroll" role="region" aria-label="Question results" tabindex="0"><table><thead><tr><th>#</th><th>Grade</th><th>Language</th><th>Mode</th><th>Question</th><th>Your answer</th><th>Correct answer</th></tr></thead><tbody>${detailRows}</tbody></table></div>` : ""}
   `;
 }
 
@@ -322,7 +317,9 @@ function launchConfetti() {
 function finishQuiz() {
   cardEl.classList.add("hidden");
   doneEl.classList.remove("hidden");
-  finalScoreEl.textContent = `Final score: ${score}/${getTotalQuestions()}`;
+  const total = getTotalQuestions();
+  const percentage = total === 0 ? 0 : Math.round((score / total) * 100);
+  finalScoreEl.textContent = `Final score: ${score}/${total} (${percentage}%)`;
   scoreBreakdownEl.innerHTML = breakdownHtml();
   progressEl.textContent = "Complete";
   progressFillEl.style.width = "100%";
